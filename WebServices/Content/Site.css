@@ -91,3 +91,8 @@ th {
     display: inline-block;
     width: 100px;
 }
+
+/* Style dodane */
+.reservation-container {
+    display: flex;
+}
