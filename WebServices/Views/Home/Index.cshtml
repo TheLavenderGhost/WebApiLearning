@@ -1,0 +1,52 @@
+﻿@{ ViewBag.Title = "Index";}
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/Home/Index.js"></script>
+}
+<div id="summaryDisplay" class="display">
+    <h4>Rezerwacje</h4>
+    <table>
+        <thead>
+            <tr>
+                <th class="selectCol"></th>
+                <th class="nameCol">Nazwisko</th>
+                <th class="locationCol">Lokalizacja</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <tr><td colspan="3">Wczytywanie danych</td></tr>
+        </tbody>
+    </table>
+    <div id="buttonContainer">
+        <button id="refresh">Odśwież</button>
+        <button id="add">Dodaj</button>
+        <button id="edit">Edytuj</button>
+        <button id="delete">Usuń</button>
+    </div>
+</div>
+
+<div id="addDisplay" class="display">
+    <h4>Nowa rezerwacja</h4>
+    @{
+        AjaxOptions addAjaxOpts = new AjaxOptions {
+            OnSuccess = "getData",
+            Url = "/api/reservation"
+        };
+    }
+    @using (Ajax.BeginForm(addAjaxOpts)) {
+        @Html.Hidden("ReservationId", 0)
+        <p><label>Nazwisko:</label>@Html.Editor("ClientName")</p>
+        <p><label>Lokalizacja:</label>@Html.Editor("Location")</p>
+        <button type="submit">Wyślij</button>
+    }
+</div>
+
+<div id="editDisplay" class="display">
+    <h4>Edycja rezerwacji</h4>
+    <form id="editForm">
+        <input id="editReservationId" type="hidden" name="ReservationId"/>
+        <p><label>Nazwisko:</label><input id="editClientName" name="ClientName" /></p>
+        <p><label>Lokalizacja:</label><input id="editLocation" name="Location" /></p>
+    </form>
+    <button id="submitEdit" type="submit">Zapisz</button>
+</div>
