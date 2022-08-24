@@ -58,5 +58,38 @@
 <hr/>
 
 <div id="commentsContainer">
-    Miejsce na komentarze
+    <div id="newComment">
+        <h4>Dodaj komentarz: </h4>
+        @{
+            AjaxOptions commentAjaxOpts = new AjaxOptions
+            {
+                OnSuccess = "getComments",
+                Url = "/api/comment"
+            };
+        }
+        @using (Ajax.BeginForm(commentAjaxOpts))
+        {
+            <p><label>Autor:</label>@Html.Editor("Text")</p>
+            <p><label>Komentarz:</label>@Html.Editor("Author")</p>
+
+            <button id="clearComment">Wyczyść</button>
+            <button type="submit">Dodaj</button>
+        }
+    </div>
+    <hr />
+    <div id="allComments">
+        <h4>Komentarze: </h4>
+        <table>
+            <thead>
+                <tr>
+                    <th class="comment-author">Autor</th>
+                    <th class="comment">Komentarz</th>
+                    <th class="vote"></th>
+                </tr>
+            </thead>
+            <tbody id="commentTableBody">
+                <tr><td colspan="2">Wczytywanie danych</td></tr>
+            </tbody>
+        </table>
+    </div>
 </div>

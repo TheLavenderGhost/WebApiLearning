@@ -13,16 +13,19 @@ namespace WebServices.Controllers
             return _commentRepository.GetAll();
         }
 
+        [HttpPost]
         public Comment CreateComment(Comment comment)
         {
             return _commentRepository.Add(comment);
         }
 
+        [HttpPut]
         public bool Upvote(int id)
         {
             return _commentRepository.Upvote(id);
         }
 
+        [HttpPut]
         public bool Downvote(int id)
         {
             return _commentRepository.Downvote(id);

@@ -21,6 +21,22 @@ function getData() {
     });
 }
 
+function getComments() {
+    $.ajax({
+        type: "GET",
+        url: "/api/comment",
+        success: function (data) {
+            let $commentTbl = $('#commentTableBody');
+            $commentTbl.empty();
+            for (var i = 0; i < data.length; i++) {
+                $commentTbl.append('<tr>'
+                    + '<td>' + data[i].Author + '</td>'
+                    + '<td>' + data[i].Text + '</td></tr>');
+            }
+        }
+    });
+}
+
 $(document).ready(function () {
     selectView("summary");
     getData();
@@ -71,4 +87,5 @@ $(document).ready(function () {
                 break;
         }
     });
+    getComments();
 });
