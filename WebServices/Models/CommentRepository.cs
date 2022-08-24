@@ -38,19 +38,15 @@ namespace WebServices.Models
             return comment;
         }
 
-        public bool Upvote(int id) => Vote(id, true);
-
-        public bool Downvote(int id) => Vote(id, false);
-
-        private bool Vote(int id, bool isUpvote)
+        public bool Vote(VoteParams voteParams)
         {
-            var comment = Get(id);
+            var comment = Get(voteParams.Id);
             if (comment == null)
             {
                 return false;
             }
 
-            if (isUpvote)
+            if (voteParams.IsUpvote)
             {
                 comment.UpvotesNumber += 1;
             }

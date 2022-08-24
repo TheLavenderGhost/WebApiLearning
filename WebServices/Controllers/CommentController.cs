@@ -20,15 +20,9 @@ namespace WebServices.Controllers
         }
 
         [HttpPut]
-        public bool Upvote(int id)
+        public bool Vote(VoteParams voteParams)
         {
-            return _commentRepository.Upvote(id);
-        }
-
-        [HttpPut]
-        public bool Downvote(int id)
-        {
-            return _commentRepository.Downvote(id);
+            return _commentRepository.Vote(voteParams);
         }
     }
 }

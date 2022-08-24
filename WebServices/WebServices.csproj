@@ -136,6 +136,7 @@
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\CommentRepository.cs" />
     <Compile Include="Models\ReservationRepository.cs" />
+    <Compile Include="Models\VoteParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

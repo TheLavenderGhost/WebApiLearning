@@ -32,15 +32,34 @@ function getComments() {
                 $commentTbl.append('<tr>'
                     + '<td>' + data[i].Author + '</td>'
                     + '<td>' + data[i].Text + '</td>'
-                    + '<td>' + data[i].UpvotesNumber + '</td>'
-                    + '<td>' + data[i].DownvotesNumber + '</td>'
+                    + '<td>' + '<button class="vote-btn up-btn" data-id="' + data[i].Id + '"></button>' + data[i].UpvotesNumber + '</td>'
+                    + '<td>' + '<button class="vote-btn down-btn" data-id="' + data[i].Id + '"></button>' + data[i].DownvotesNumber + '</td>'
                     + '</tr>');
             }
             $("#Author").val('');
             $("#Text").val('');
+            $(".up-btn").click(function (e) {
+                vote(e, true);
+            });
+            $(".down-btn").click(function (e) {
+                vote(e, false);
+            });
         }
     });
 }
+
+function vote(e, isUpvote) {
+    let id = e.delegateTarget.dataset.id;
+    let params = { id: id, isupvote: isUpvote };
+    $.ajax({
+        type: "PUT",
+        url: "/api/comment",
+        data: params,
+        success: function (result) {
+            getComments();
+        }
+    });
+};
 
 function displayError(data) {
     alert(data.statusText);
