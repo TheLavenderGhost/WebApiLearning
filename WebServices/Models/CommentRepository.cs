@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.WebPages;
 
 namespace WebServices.Models
 {
@@ -7,7 +11,7 @@ namespace WebServices.Models
         private List<Comment> _data = new List<Comment> {
             new Comment {Id = 1,  Text = "Testowy komentarz", Author = "Admin", UpvotesNumber = 0, DownvotesNumber = 1},
             new Comment {Id = 2,  Text = "Jest super!", Author = "Anonimowy Gość", UpvotesNumber = 5, DownvotesNumber = 0},
-            new Comment {Id = 3,  Text = "Podbijam świat...", Author = "Adventure", UpvotesNumber = 2, DownvotesNumber = 2},
+            new Comment {Id = 3,  Text = "Podbijam świat niczym zdobywca najwyższych szczytów...", Author = "Adventure", UpvotesNumber = 2, DownvotesNumber = 2},
         };
 
         private static ICommentRepository _repo = new CommentRepository();
@@ -22,6 +26,14 @@ namespace WebServices.Models
 
         public Comment Add(Comment comment) {
             comment.Id = _data.Count + 1;
+            if(comment.Author.IsEmpty() || comment.Text.IsEmpty())
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    ReasonPhrase = "Autor ani komentarz nie moga byc puste."
+                };
+                throw new HttpResponseException(response);
+            }
             _data.Add(comment);
             return comment;
         }

@@ -64,15 +64,16 @@
             AjaxOptions commentAjaxOpts = new AjaxOptions
             {
                 OnSuccess = "getComments",
+                OnFailure = "displayError",
                 Url = "/api/comment"
             };
         }
         @using (Ajax.BeginForm(commentAjaxOpts))
         {
-            <p><label>Autor:</label>@Html.Editor("Text")</p>
-            <p><label>Komentarz:</label>@Html.Editor("Author")</p>
+            <p><label>Autor:</label>@Html.Editor("Author")</p>
+            <p><label>Komentarz:</label>@Html.Editor("Text")</p>
 
-            <button id="clearComment">Wyczyść</button>
+            <button type="reset" id="clearComment">Wyczyść</button>
             <button type="submit">Dodaj</button>
         }
     </div>
@@ -84,11 +85,12 @@
                 <tr>
                     <th class="comment-author">Autor</th>
                     <th class="comment">Komentarz</th>
-                    <th class="vote"></th>
+                    <th class="upvote">&uarr;</th>
+                    <th class="downvote">&darr;</th>
                 </tr>
             </thead>
             <tbody id="commentTableBody">
-                <tr><td colspan="2">Wczytywanie danych</td></tr>
+                <tr><td colspan="4">Wczytywanie danych</td></tr>
             </tbody>
         </table>
     </div>

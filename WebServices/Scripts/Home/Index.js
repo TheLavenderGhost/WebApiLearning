@@ -31,10 +31,19 @@ function getComments() {
             for (var i = 0; i < data.length; i++) {
                 $commentTbl.append('<tr>'
                     + '<td>' + data[i].Author + '</td>'
-                    + '<td>' + data[i].Text + '</td></tr>');
+                    + '<td>' + data[i].Text + '</td>'
+                    + '<td>' + data[i].UpvotesNumber + '</td>'
+                    + '<td>' + data[i].DownvotesNumber + '</td>'
+                    + '</tr>');
             }
+            $("#Author").val('');
+            $("#Text").val('');
         }
     });
+}
+
+function displayError(data) {
+    alert(data.statusText);
 }
 
 $(document).ready(function () {
