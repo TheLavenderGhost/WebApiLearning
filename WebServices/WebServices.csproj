@@ -124,14 +124,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ICommentRepository.cs" />
     <Compile Include="Models\IReservationRepository.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\CommentRepository.cs" />
     <Compile Include="Models\ReservationRepository.cs" />
+    <Compile Include="Models\VoteParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
